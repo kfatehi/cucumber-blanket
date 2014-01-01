@@ -20,16 +20,13 @@ module Cucumber
       end
 
       def accrue! page_data
-        # go through every line of every file and OR it all together
-        # e.g. line 1 is 1 and 0, so it is 1
-        #binding.pry
         if @data.nil?
           @data = page_data
         else
           # for files in page_data ...
           page_data['files'].each do |filename, linedata|
             # that exist in @data
-            if @data['files'].has_key? page_data['files'].first[0]
+            if @data['files'][filename]
               # accrue coverage data, meaning:
               # get a handle on existing linedata and iterate
               @data['files'][filename].each_with_index do |cov_stat, line_no|

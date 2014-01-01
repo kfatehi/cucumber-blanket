@@ -32,7 +32,7 @@ describe Cucumber::Blanket::CoverageData do
         covdata['files'][@filename] = nil
       end
       it "will not try to iterate over nil" do
-        expect(lambda{covdata.accrue! @data_copy}).not_to raise_error NoMethodError
+        expect {covdata.accrue! @data_copy}.not_to raise_error
       end
     end
   end
