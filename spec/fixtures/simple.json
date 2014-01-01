@@ -1,4 +1,4 @@
-[{
+{
     "files": {
         "http://127.0.0.1:32344/js/collections/assets.js": [null, 1, 1, null, 1, null, null, null, 0, 0, null, 0, null, null, null, null, 0, 0]
     },
@@ -12,4 +12,4 @@
         "suites": 0,
         "tests": 1
     }
-}]
+}
