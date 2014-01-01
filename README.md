@@ -1,7 +1,7 @@
 # Cucumber::Blanket
 
-**WIP** -- will be done soon though, it's close, I just need to flatten
-the data as it comes in and complete the report generator
+**WIP** -- will be done soon though, it's close, I just need to complete
+the report generator
 
 Works to extract [Blanket.js](https://github.com/alex-seville/blanket) coverage data 
 from the browser from Cucumber.
@@ -55,13 +55,12 @@ end
 Of course every scenario will touch on different parts of your code, as
 such Cucumber::Blanket OR's the lines. In other words, if line 10 of
 File A was covered in Scenario X, but not in Scenario Y, line 10 is
-considered covered when Cucumber has finished running. **not done yet**
+considered covered when Cucumber has finished running.
 
 Finally, to generate a report **not done yet**, you can do:
 
 ```ruby
 after_exit do
-  $stack.stop
   puts Cucumber::Blanket.generate_report
 end
 ```
