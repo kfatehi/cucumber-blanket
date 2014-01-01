@@ -1,9 +1,12 @@
 require "cucumber/blanket/version"
+require "cucumber/blanket/iron"
 
 module Cucumber
   module Blanket
     class << self
       @@coverage_data = []
+
+      include Iron
 
       # Grab code coverage from the frontend
       # Currently this adds >1 second to every scenario, but it's worth it
@@ -13,13 +16,7 @@ module Cucumber
         page.evaluate_script("blanket.onTestsDone();")
         sleep 0.5 # Allow time for blanketJS and the adapter to prepare the report
         @@coverage_data << page.evaluate_script("window.COVERAGE_RESULTS")
-        flatten!
-      end
-
-      def flatten!
-        # go through every line of every file and OR it all together
-        # e.g. line 1 is 1 and 0, so it is 1
-        # @@coverage_data should never exceed length 2
+        @@coverage_data = flatten!(@@coverage_data)
       end
 
       def generate_report

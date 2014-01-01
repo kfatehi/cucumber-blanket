@@ -1,0 +1,15 @@
+[{
+    "files": {
+        "http://127.0.0.1:32344/js/collections/assets.js": [null, 1, 1, null, 1, null, null, null, 0, 0, null, 0, null, null, null, null, 0, 0]
+    },
+    "instrumentation": "blanket",
+    "stats": {
+        "end": {},
+        "failures": 0,
+        "passes": 1,
+        "pending": 0,
+        "start": {},
+        "suites": 0,
+        "tests": 1
+    }
+}]
