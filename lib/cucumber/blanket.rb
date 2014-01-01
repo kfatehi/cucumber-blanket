@@ -42,7 +42,7 @@ module Cucumber
           end
         end
         if total_lines > 0
-          return (covered_lines.to_f / total_lines)*100
+          return ((covered_lines.to_f / total_lines)*100).round(2)
         else
           return 0.0
         end
