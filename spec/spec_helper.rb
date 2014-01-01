@@ -19,12 +19,5 @@ class FakePage
       self.coverage_data
     end
   end
-
-  ##
-  # Helper to change the lines of coverage for testing flattening
-  # of two sets of coverage data
-  def cov_lines
-    
-  end
 end
 
