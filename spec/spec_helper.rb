@@ -11,7 +11,7 @@ class FakePage
 
   def parse_fixture_json
     json = File.read(File.join(File.dirname(__FILE__),'fixtures','simple.json'))
-    return JSON.parse(json)[0] # How it looks when we get it from Selenium
+    return JSON.parse(json) # How it looks when we get it from Selenium
   end
 
   def evaluate_script script
