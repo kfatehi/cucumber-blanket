@@ -1,10 +1,8 @@
 # Cucumber::Blanket
 
-**WIP** -- will be done soon though, it's close, I just need to complete
-the report generator
-
-Works to extract [Blanket.js](https://github.com/alex-seville/blanket) coverage data 
-from the browser from Cucumber.
+Works to extract accumulated [Blanket.js](https://github.com/alex-seville/blanket) coverage data 
+from the browser from a Cucumber environment. Accumulated, in this context, means that coverage data
+is accumulated from scenario to scenario, in an additive fashion.
 
 ## Installation
 
@@ -57,15 +55,24 @@ such Cucumber::Blanket OR's the lines. In other words, if line 10 of
 File A was covered in Scenario X, but not in Scenario Y, line 10 is
 considered covered when Cucumber has finished running.
 
-Finally, to generate a report **not done yet**, you can do:
+Finally, to gain access to the accumulated coverage data, you can use the shorthand `Cucumber::Blanket.files`:
 
 ```ruby
 after_exit do
-  puts Cucumber::Blanket.generate_report
+  covdata =  # do something with it
+  File.open("tmp/coverage.json", "w") do |file|
+    file.write Cucumber::Blanket.files.to_json
+    # writes out JSON of this form of ruby hash:
+    # => {"http://127.0.0.1:32344/js/collections/assets.js"=>
+    #  [3, 3, 3, nil, 3, nil, nil, nil, 0, 0, nil, 0, nil, nil, nil, nil, 0, 0]}
+    # {filename=>[lineCov,lineCov,lineCov]}
+    # At this stage you can fetch the files and create a nice HTML report, etc
+  end
 end
 ```
 
-I have both of these in my `features/support/hooks.rb` file.
+I have both of these in my `features/support/hooks.rb` file. As far as doing something useful
+with the coverage data, that's left up to the user, another gem, or maybe blanket.js itself from Node.js.
 
 ## Contributing
 

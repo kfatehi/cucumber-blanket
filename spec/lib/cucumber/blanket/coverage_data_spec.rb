@@ -21,4 +21,15 @@ describe Cucumber::Blanket::CoverageData do
       covdata["files"].first[1][1].should eq 2
     end
   end
+
+
+  describe "#files" do
+    it "shorthand for accessing the files hash" do
+      covdata.files.should eq covdata.data[0]['files']
+      covdata.files.should be_a Hash
+    end
+    it "has a shortcut that produces the same data" do
+      Cucumber::Blanket.files.should eq covdata.files
+    end
+  end
 end

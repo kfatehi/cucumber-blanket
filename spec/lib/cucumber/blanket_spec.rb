@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Cucumber::Blanket do
+
+  describe "#files" do
+    it "is a shortcut for coverage_data#files" do
+      subject.files.should eq subject.coverage_data.files
+    end
+  end
+
   describe "#extract_from" do
     let(:page) { FakePage.new }
     context "Selenium-returned blanket.js coverage data structure characteristics" do

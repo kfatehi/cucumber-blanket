@@ -10,6 +10,10 @@ module Cucumber
         @@coverage_data
       end
 
+      def files
+        self.coverage_data.files
+      end
+
       # Grab code coverage from the frontend
       # Currently this adds >1 second to every scenario, but it's worth it
       def extract_from page
@@ -20,11 +24,6 @@ module Cucumber
         page_data = page.evaluate_script("window.COVERAGE_RESULTS")
         @@coverage_data.accrue! page_data
         return page_data
-      end
-
-      def generate_report
-        # but for now, so you know it's there...
-        puts "coverage data length: #{@@coverage_data.inspect}"
       end
     end
   end

@@ -8,11 +8,15 @@ module Cucumber
       attr_reader :data
 
       def initialize
-        @data = nil
+        @data = [{'files'=>{}}]
       end
 
       def method_missing *args
         @data[0].send(*args)
+      end
+
+      def files
+        self.data[0]['files']
       end
 
       def accrue! page_data
