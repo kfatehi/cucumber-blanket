@@ -27,4 +27,17 @@ describe Cucumber::Blanket do
       end
     end
   end
+
+  describe "#percent" do
+    before(:each) { subject.reset! }
+    it "returns total percent coverage of known lines of code as float" do
+      subject.extract_from(FakePage.new)
+      subject.percent.should eq 37.5
+    end
+    context "no data harvested yet" do
+      it "returns zero" do
+        subject.percent.should eq 0.0
+      end
+    end
+  end
 end

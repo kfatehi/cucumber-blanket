@@ -74,6 +74,10 @@ end
 I have both of these in my `features/support/hooks.rb` file. As far as doing something useful
 with the coverage data, that's left up to the user, another gem, or maybe blanket.js itself from Node.js.
 
+## Other Features
+
+You can use `Cucumber::Blanket.percent` to get a float value of coverage of known lines of code.
+
 ## Contributing
 
 1. Fork it

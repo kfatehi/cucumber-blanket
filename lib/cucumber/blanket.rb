@@ -29,6 +29,24 @@ module Cucumber
         @@coverage_data.accrue! page_data
         return page_data
       end
+
+      def percent
+        total_lines = 0
+        covered_lines = 0
+        self.files.each do |filename, linedata|
+          linedata.compact.each do |cov_stat|
+            if cov_stat > 0
+              covered_lines += 1
+            end
+            total_lines += 1
+          end
+        end
+        if total_lines > 0
+          return (covered_lines.to_f / total_lines)*100
+        else
+          return 0.0
+        end
+      end
     end
   end
 end
