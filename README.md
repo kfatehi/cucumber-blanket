@@ -76,7 +76,42 @@ with the coverage data, that's left up to the user, another gem, or maybe blanke
 
 ## Other Features
 
+### Percent
+
 You can use `Cucumber::Blanket.percent` to get a float value of coverage of known lines of code.
+
+For example, you can do something like this to watch coverage increasing on every scenario:
+
+```ruby
+After do |scenario|
+  old_pct = Cucumber::Blanket.percent
+  Cucumber::Blanket.extract_from page
+  current_pct = Cucumber::Blanket.percent
+  pct_added = current_pct - old_pct
+  STDOUT.puts "Coverage: #{current_pct}% (+#{pct_added}%)"
+end
+
+at_exit do
+  STDOUT.puts "Final coverage: #{Cucumber::Blanket.percent}%"
+end
+```
+
+### Options
+
+You can adjust the wait times used to allow blanket.js to work, you should adjust
+this if you are getting an error like this:
+
+```
+unknown error: You must call blanket.setupCoverage() first.
+  (Session info: chrome=31.0.1650.63)
+  (Driver info: chromedriver=2.6.232908,platform=Mac OS X 10.9.1 x86_64) (Selenium::WebDriver::Error::UnknownError)
+```
+
+When you're extracting from the page, you can adjust the defaults (they are set to half-second) -- just keep in mind that if you set one you must set the other too.
+
+```
+Cucumber::Blanket.extract_from page, setup_wait:1, extract_wait:1 # increased each by a half-second
+```
 
 ## Contributing
 
