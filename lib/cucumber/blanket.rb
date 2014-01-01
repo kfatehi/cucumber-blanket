@@ -10,6 +10,10 @@ module Cucumber
         @@coverage_data
       end
 
+      def reset!
+        @@coverage_data = CoverageData.new
+      end
+
       def files
         self.coverage_data.files
       end
