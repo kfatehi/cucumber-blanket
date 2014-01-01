@@ -22,6 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
+You should be using Cucumber
+
+Require this gem at the top of `features/support/env.rb` or before using it.
+
+```ruby
+require 'cucumber/blanket'
+```
+
+Install blanket.js
+
 Two javascript files are bundled;
 * blanket.js -- the library itself
 * cucumber-blanket.js -- a very simple modification
