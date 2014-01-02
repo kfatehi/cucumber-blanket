@@ -96,22 +96,16 @@ at_exit do
 end
 ```
 
-### Options
+### Write HTML Report
 
-You can adjust the wait times used to allow blanket.js to work, you should adjust
-this if you are getting an error like this:
+After you've captured some coverage data, you can create an HTML report
+like so:
 
-```
-unknown error: You must call blanket.setupCoverage() first.
-  (Session info: chrome=31.0.1650.63)
-  (Driver info: chromedriver=2.6.232908,platform=Mac OS X 10.9.1 x86_64) (Selenium::WebDriver::Error::UnknownError)
+```ruby
+Cucumber::Blanket.write_html_report File.join(File.dirname(__FILE__), '../../coverage.html')
 ```
 
-When you're extracting from the page, you can adjust the defaults (they are set to half-second) -- just keep in mind that if you set one you must set the other too.
-
-```
-Cucumber::Blanket.extract_from page, setup_wait:1, extract_wait:1 # increased each by a half-second
-```
+I like to put this in `after_exit` in my Cucumber `hooks.rb` file
 
 ## Dev Notes
 
