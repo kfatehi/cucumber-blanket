@@ -1,0 +1,57 @@
+!!!
+%html
+  %head
+    %title cucumber-blanket coverage report
+    :css
+      pre {
+        margin:0;
+      }
+      .ignored {
+      }
+      .missed {
+        background-color: #f74552;
+      }
+      .covered {
+        background-color: #72f779;
+      }
+
+    :javascript
+      function toggleScriptContentDisplay(a) {
+        var contents = a.parentElement.childNodes[3];
+        if (contents.style.display === "none") {
+          contents.style.display = "block";
+        } else {
+          contents.style.display = "none";
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        scripts = document.querySelectorAll('a.script_url');
+        for (var i = 0, l = scripts.length; i < l; i ++) {
+          var script = scripts[i];
+          script.onclick = function() {
+            toggleScriptContentDisplay(this);
+            return false;
+          };
+        }
+      });
+
+
+  %body
+    %table.ui.table.segment
+      %thead
+        %tr
+          %th Script
+          %th Coverage #{@data.percent}%
+      %tbody
+        - @data.files.each do |script_url, covdata|
+          - lines = @data.sources[script_url]
+          %tr
+            %td
+              %a.script_url{:href=>"#"}= script_url
+              .contents{style:"display:none"}
+                - lines.each_with_index do |line, line_no|
+                  - cov = covdata[line_no]
+                  %pre{:class=>(cov.nil? ? "ignored" : (cov == 0 ? 'missed' : 'covered'))}
+                    = line.gsub(' ', '&nbsp;')
+            %td #{@data.percent_covered(script_url)} %
