@@ -1,15 +1,12 @@
 {
+    "done": true,
     "files": {
-        "http://127.0.0.1:32344/js/collections/assets.js": [null, 1, 1, null, 1, null, null, null, 0, 0, null, 0, null, null, null, null, 0, 0]
+        "http://127.0.0.1:32344/js/collections/comments.js": [null, 1, 1, null, 1],
+        "http://127.0.0.1:32344/js/views/plans.js": [null, 1, 1, null, 1, null, null, null, null, null, null, 0, 0]
     },
-    "instrumentation": "blanket",
-    "stats": {
-        "end": {},
-        "failures": 0,
-        "passes": 1,
-        "pending": 0,
-        "start": {},
-        "suites": 0,
-        "tests": 1
+    "is_setup": true,
+    "sources": {
+        "http://127.0.0.1:32344/js/collections/comments.js": ["(function () {", "  'use strict';", "", "  App.Collections.Comments = Backbone.Collection.extend({", "", "    model: App.Models.Comment", "", "  });", "}());", "", ""],
+        "http://127.0.0.1:32344/js/views/plans.js": ["(function(){", "  \"use strict\";", "", "  App.Views.Plans = Backbone.View.extend({", "    events: {", "    },", "", "    template: App.Templates.plans,", "", "    render: function() {", "      this.$el.html(this.template);", "      return this;", "    }", "  });", "}());", ""]
     }
 }
