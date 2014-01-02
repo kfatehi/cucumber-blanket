@@ -51,8 +51,12 @@ describe Cucumber::Blanket do
   end
 
   describe "#write_html_report" do
-    it "generates an HTML file at the desired location" do
+    let(:path) { '/tmp/cucumber-blanket-report.html' }
+    before { FileUtils.rm(path) if File.exists?(path) }
 
+    it "generates an HTML file at the desired location" do
+      subject.write_html_report path
+      File.exists?(path).should be_true
     end
   end
 end

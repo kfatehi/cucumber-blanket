@@ -59,6 +59,12 @@ module Cucumber
           return 0.0
         end
       end
+
+      def write_html_report path
+        File.open(path, 'w') do |file|
+          file.write("Here's your HTML")
+        end
+      end
     end
   end
 end
