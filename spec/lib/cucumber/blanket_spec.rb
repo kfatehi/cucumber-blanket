@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe Cucumber::Blanket do
 
+  let(:page) { FakePage.new }
+  before(:each) do
+    subject.reset!
+    subject.extract_from(page)
+  end
+
   describe "#files" do
     it "is a shortcut for coverage_data#files" do
       subject.files.should eq subject.coverage_data.files
@@ -15,10 +21,8 @@ describe Cucumber::Blanket do
   end
 
   describe "#extract_from" do
-    let(:page) { FakePage.new }
     context "Selenium-returned blanket.js coverage data structure characteristics" do
       let(:cov) do
-        subject.extract_from(page)
         subject.coverage_data
       end
       specify { cov.should have_key 'files' }
@@ -35,15 +39,20 @@ describe Cucumber::Blanket do
   end
 
   describe "#percent" do
-    before(:each) { subject.reset! }
     it "returns total percent coverage of known lines of code as float" do
-      subject.extract_from(FakePage.new)
       subject.percent.should eq 75.0
     end
     context "no data harvested yet" do
       it "returns zero" do
+        subject.reset!
         subject.percent.should eq 0.0
       end
+    end
+  end
+
+  describe "#write_html_report" do
+    it "generates an HTML file at the desired location" do
+
     end
   end
 end
