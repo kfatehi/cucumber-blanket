@@ -61,8 +61,9 @@ module Cucumber
       end
 
       def write_html_report path
+        generator = ReportGenerator.new(:html, self)
         File.open(path, 'w') do |file|
-          file.write("Here's your HTML")
+          file.write(generator.render)
         end
       end
     end
