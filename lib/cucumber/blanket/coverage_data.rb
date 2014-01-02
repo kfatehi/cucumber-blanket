@@ -23,6 +23,22 @@ module Cucumber
         self.data['sources']
       end
 
+      def percent_covered script_url
+        total_lines = 0
+        covered_lines = 0
+        self.files[script_url].compact.each do |cov_stat|
+          if cov_stat > 0
+            covered_lines += 1
+          end
+          total_lines += 1
+        end
+        if total_lines > 0
+          return ((covered_lines.to_f / total_lines)*100).round(2)
+        else
+          return 0.0
+        end
+      end
+
       def accrue! page_data
         if @data.nil?
           @data = page_data

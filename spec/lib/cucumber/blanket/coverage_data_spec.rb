@@ -57,4 +57,11 @@ describe Cucumber::Blanket::CoverageData do
       Cucumber::Blanket.sources.should eq covdata.sources
     end
   end
+
+  describe "#percent_covered" do
+    it "returns the percent covered for a given script" do
+      res = covdata.percent_covered covdata.files.keys[1]
+      res.should eq 60.0
+    end
+  end
 end

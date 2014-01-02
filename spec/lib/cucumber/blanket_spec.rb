@@ -57,6 +57,7 @@ describe Cucumber::Blanket do
     it "generates an HTML file at the desired location" do
       subject.write_html_report path
       File.exists?(path).should be_true
+      system("open #{path}") if ENV['showreport']
     end
   end
 end
