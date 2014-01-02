@@ -14,8 +14,8 @@ module Cucumber
         @@coverage_data = CoverageData.new
       end
 
-      def files
-        self.coverage_data.files
+      def method_missing *args
+        self.coverage_data.send(*args)
       end
 
       # Grab code coverage from the frontend

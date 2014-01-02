@@ -8,6 +8,12 @@ describe Cucumber::Blanket do
     end
   end
 
+  describe "#sources" do
+    it "is a shortcut for coverage_data#sources" do
+      subject.sources.should eq subject.coverage_data.sources
+    end
+  end
+
   describe "#extract_from" do
     let(:page) { FakePage.new }
     context "Selenium-returned blanket.js coverage data structure characteristics" do

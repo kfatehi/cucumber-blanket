@@ -8,7 +8,7 @@ module Cucumber
       attr_reader :data
 
       def initialize
-        @data = {'files'=>{}}
+        @data = {'files'=>{}, 'sources'=>{}}
       end
 
       def method_missing *args
@@ -17,6 +17,10 @@ module Cucumber
 
       def files
         self.data['files']
+      end
+
+      def sources
+        self.data['sources']
       end
 
       def accrue! page_data
@@ -49,6 +53,11 @@ module Cucumber
               # add it to 'files' as is
               @data['files'][filename] = linedata
             end
+          end
+
+          # As far as sources are concerned, we just add it if an entry doesn't exist
+          page_data['sources'].each do |filename, lines|
+            @data['sources'][filename] ||= lines
           end
         end
       end

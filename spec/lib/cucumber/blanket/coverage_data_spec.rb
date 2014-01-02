@@ -47,4 +47,14 @@ describe Cucumber::Blanket::CoverageData do
       Cucumber::Blanket.files.should eq covdata.files
     end
   end
+
+  describe "#sources" do
+    it "shorthand for accessing the sources hash" do
+      covdata.sources.should eq covdata.data['sources']
+      covdata.sources.should be_a Hash
+    end
+    it "has a shortcut that produces the same data" do
+      Cucumber::Blanket.sources.should eq covdata.sources
+    end
+  end
 end
