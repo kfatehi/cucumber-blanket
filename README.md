@@ -113,6 +113,18 @@ When you're extracting from the page, you can adjust the defaults (they are set 
 Cucumber::Blanket.extract_from page, setup_wait:1, extract_wait:1 # increased each by a half-second
 ```
 
+## Dev Notes
+
+To create the `spec/fixtures/simple.json` with new real data, add this line
+to Cucumber::Blanket#extract_from once you have a handle to page_data:
+
+```ruby
+File.open("tmp/out.json", 'w'){|f| f.write page_data.to_json}
+```
+
+Run it through jsbeautifier and add it
+
+
 ## Contributing
 
 1. Fork it
