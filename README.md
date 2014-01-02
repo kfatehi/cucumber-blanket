@@ -118,6 +118,10 @@ File.open("tmp/out.json", 'w'){|f| f.write page_data.to_json}
 
 Run it through jsbeautifier and add it
 
+### Report Generation Preview
+
+Run the specs with the environment variable `showreport` set. e.g.
+`showreport=1 bundle exec rspec spec`
 
 ## Contributing
 
