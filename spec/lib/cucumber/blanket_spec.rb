@@ -32,7 +32,7 @@ describe Cucumber::Blanket do
     before(:each) { subject.reset! }
     it "returns total percent coverage of known lines of code as float" do
       subject.extract_from(FakePage.new)
-      subject.percent.should eq 37.5
+      subject.percent.should eq 75.0
     end
     context "no data harvested yet" do
       it "returns zero" do

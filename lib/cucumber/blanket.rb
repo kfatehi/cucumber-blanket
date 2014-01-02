@@ -19,19 +19,27 @@ module Cucumber
       end
 
       # Grab code coverage from the frontend
-      # Currently this adds >1 second to every scenario, but it's worth it
+      # Currently this adds something like a few second or more to every scenario
       # The waits are lame but here's what it's trying to avoid
       #    unknown error: You must call blanket.setupCoverage() first.
       #       (Session info: chrome=31.0.1650.63)
       #       (Driver info: chromedriver=2.6.232908,platform=Mac OS X 10.9.1 x86_64) (Selenium::WebDriver::Error::UnknownError)
       def extract_from page, opts={setup_wait: 0.5, extract_wait: 0.5}
-        sleep opts[:setup_wait] # Give blanketJS time to setupCoverage() before we go to stop it
-        page.evaluate_script("blanket.onTestDone();")
+        @page = page
+        sleep(opts[:setup_wait]) until coverage_is_setup?
         page.evaluate_script("blanket.onTestsDone();")
-        sleep opts[:extract_wait] # Allow time for blanketJS and the adapter to prepare the report
-        page_data = page.evaluate_script("window.COVERAGE_RESULTS")
+        sleep(opts[:extract_wait]) until data_ready?
+        page_data = page.evaluate_script("window.CUCUMBER_BLANKET")
         @@coverage_data.accrue! page_data
         return page_data
+      end
+
+      def coverage_is_setup?
+        @page.evaluate_script("window.CUCUMBER_BLANKET.is_setup")
+      end
+
+      def data_ready?
+        @page.evaluate_script("window.CUCUMBER_BLANKET.done")
       end
 
       def percent

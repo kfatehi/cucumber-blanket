@@ -15,8 +15,12 @@ class FakePage
   end
 
   def evaluate_script script
-    if script == "window.COVERAGE_RESULTS"
+    if script == "window.CUCUMBER_BLANKET"
       self.coverage_data
+    elsif script == "window.CUCUMBER_BLANKET.done"
+      true
+    elsif script == "window.CUCUMBER_BLANKET.is_setup"
+      true
     end
   end
 end
