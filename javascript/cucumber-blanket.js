@@ -1,4 +1,10 @@
 (function (){
+  window.CUCUMBER_BLANKET = {
+    files: {},
+    sources: {},
+    done: false,
+    is_setup: false
+  };
   /* ADAPTER
    *
    * This blanket.js adapter is designed to autostart coverage
@@ -15,12 +21,7 @@
     callback: function() {
       blanket.setupCoverage();
       blanket.onTestStart();
-      window.CUCUMBER_BLANKET = {
-        files: {},
-        sources: {},
-        done: false,
-        is_setup: true
-      };
+      window.CUCUMBER_BLANKET.is_setup = true;
     }
   });
 
